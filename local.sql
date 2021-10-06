@@ -1,8 +1,8 @@
 -- MariaDB dump 10.19  Distrib 10.6.4-MariaDB, for Linux (x86_64)
 --
--- Host: elecompindonesia.com    Database: k9734772_db_tokoonline2
+-- Host: 127.0.0.1    Database: toko_online
 -- ------------------------------------------------------
--- Server version	5.7.35-cll-lve
+-- Server version	10.6.4-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -82,7 +82,7 @@ CREATE TABLE `data_refund` (
   `no_rekening` varchar(50) NOT NULL,
   `ATM` varchar(50) NOT NULL,
   `nama_penerima` varchar(50) NOT NULL,
-  `status_kirim` tinyint(1) NOT NULL DEFAULT '0',
+  `status_kirim` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_refund`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -120,8 +120,8 @@ CREATE TABLE `detail_order` (
   `pembayaran` double DEFAULT NULL,
   `tagihan` double DEFAULT NULL,
   `status_kirim` int(1) DEFAULT NULL,
-  `status_detail_komplain` int(11) NOT NULL DEFAULT '0',
-  `status_bayar` int(11) NOT NULL DEFAULT '0',
+  `status_detail_komplain` int(11) NOT NULL DEFAULT 0,
+  `status_bayar` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_detail_order`)
 ) ENGINE=InnoDB AUTO_INCREMENT=276 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -357,7 +357,7 @@ CREATE TABLE `komplain_barang` (
   `jenis_komplain` varchar(255) NOT NULL,
   `status_komplain` varchar(50) NOT NULL DEFAULT 'Belum Ditangani',
   `tgl_komplain` date NOT NULL,
-  `status_dana_kembali` int(11) NOT NULL DEFAULT '0',
+  `status_dana_kembali` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_komplain`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -444,7 +444,7 @@ CREATE TABLE `konfirmasi_pengembalian_produk` (
   `no_rek` varchar(255) NOT NULL,
   `nama_rek` varchar(255) NOT NULL,
   `jenis_bank` varchar(255) NOT NULL,
-  `status_sampai` int(11) NOT NULL DEFAULT '0',
+  `status_sampai` int(11) NOT NULL DEFAULT 0,
   `no_resi_ganti` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_konfirmasi_pengembalian_produk`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
@@ -583,7 +583,7 @@ CREATE TABLE `mainmenu` (
   `icon_class` varchar(50) NOT NULL,
   `link_menu` varchar(50) NOT NULL,
   `menu_akses` varchar(12) NOT NULL,
-  `entry_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `entry_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `entry_user` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`seq`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
@@ -640,8 +640,8 @@ CREATE TABLE `ongkir_pembeli` (
   `ongkir` varchar(50) NOT NULL,
   `id_order` varchar(50) NOT NULL,
   `id_penjual` varchar(50) NOT NULL,
-  `tagihan_admin` int(11) NOT NULL DEFAULT '0',
-  `pembayaran` int(11) NOT NULL DEFAULT '0',
+  `tagihan_admin` int(11) NOT NULL DEFAULT 0,
+  `pembayaran` int(11) NOT NULL DEFAULT 0,
   `jasa_pengiriman` varchar(255) NOT NULL,
   PRIMARY KEY (`id_ongkir`)
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=latin1;
@@ -678,7 +678,7 @@ CREATE TABLE `order` (
   `provinsi` varchar(50) NOT NULL,
   `kota` varchar(50) NOT NULL,
   `ongkir` int(11) NOT NULL,
-  `status_bayar` int(11) DEFAULT '0',
+  `status_bayar` int(11) DEFAULT 0,
   `kurir` varchar(50) NOT NULL,
   `paket_kirim` varchar(50) NOT NULL,
   `lama_kirim` varchar(50) NOT NULL,
@@ -736,23 +736,23 @@ CREATE TABLE `produk` (
   `id_user` varchar(50) NOT NULL DEFAULT 'Admin',
   `kode_produk` varchar(20) DEFAULT NULL,
   `nama_produk` varchar(255) NOT NULL,
-  `id_menu` int(11) NOT NULL DEFAULT '1',
+  `id_menu` int(11) NOT NULL DEFAULT 1,
   `kategori_produk` int(11) NOT NULL,
   `harga` int(255) NOT NULL,
   `berat_kotor` int(11) NOT NULL,
   `berat_bersih` int(11) NOT NULL,
   `stok_produk` varchar(20) DEFAULT NULL,
-  `ket` text,
+  `ket` text DEFAULT NULL,
   `deskripsi` text NOT NULL,
   `foto_produk1` varchar(50) DEFAULT NULL,
   `foto_produk2` varchar(50) NOT NULL,
   `foto_produk3` varchar(50) NOT NULL,
   `jumlah_stok` int(11) NOT NULL,
   `jumlah_terjual` int(11) DEFAULT NULL,
-  `provinsi` int(11) NOT NULL DEFAULT '11',
-  `kota` int(11) NOT NULL DEFAULT '255',
-  `validasi` tinyint(1) NOT NULL DEFAULT '0',
-  `pajak` double NOT NULL DEFAULT '5',
+  `provinsi` int(11) NOT NULL DEFAULT 11,
+  `kota` int(11) NOT NULL DEFAULT 255,
+  `validasi` tinyint(1) NOT NULL DEFAULT 0,
+  `pajak` double NOT NULL DEFAULT 5,
   PRIMARY KEY (`id_produk`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2107300003 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -858,7 +858,7 @@ CREATE TABLE `submenu` (
   `icon_class` varchar(100) NOT NULL,
   `link_sub` varchar(50) NOT NULL,
   `sub_akses` varchar(12) NOT NULL,
-  `entry_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `entry_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `entry_user` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_sub`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -911,11 +911,11 @@ CREATE TABLE `tab_akses_mainmenu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_menu` int(11) NOT NULL,
   `id_level` int(11) NOT NULL,
-  `c` int(11) DEFAULT '0',
-  `r` int(11) DEFAULT '0',
-  `u` int(11) DEFAULT '0',
-  `d` int(11) DEFAULT '0',
-  `entry_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `c` int(11) DEFAULT 0,
+  `r` int(11) DEFAULT 0,
+  `u` int(11) DEFAULT 0,
+  `d` int(11) DEFAULT 0,
+  `entry_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `entry_user` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
@@ -942,11 +942,11 @@ CREATE TABLE `tab_akses_submenu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_sub_menu` int(11) NOT NULL,
   `id_level` int(11) NOT NULL,
-  `c` int(11) DEFAULT '0',
-  `r` int(11) DEFAULT '0',
-  `u` int(11) DEFAULT '0',
-  `d` int(11) DEFAULT '0',
-  `entry_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `c` int(11) DEFAULT 0,
+  `r` int(11) DEFAULT 0,
+  `u` int(11) DEFAULT 0,
+  `d` int(11) DEFAULT 0,
+  `entry_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `entry_user` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -971,7 +971,7 @@ DROP TABLE IF EXISTS `tb_about`;
 CREATE TABLE `tb_about` (
   `id_about` int(11) NOT NULL AUTO_INCREMENT,
   `about_logo` varchar(30) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
-  `about_deskripsi` text CHARACTER SET latin1 COLLATE latin1_general_ci,
+  `about_deskripsi` text CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `id_admin` int(11) DEFAULT NULL,
   `about_title_meta` varchar(200) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `about_deskripsi_meta` varchar(200) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
@@ -1055,10 +1055,10 @@ CREATE TABLE `tb_kontak` (
   `id_kontak` int(11) NOT NULL AUTO_INCREMENT,
   `kontak_lat` varchar(100) DEFAULT NULL,
   `kontak_long` varchar(100) DEFAULT NULL,
-  `kontak_deskripsi` text,
+  `kontak_deskripsi` text DEFAULT NULL,
   `kontak_judul` varchar(30) DEFAULT NULL,
   `kontak_title_meta` varchar(200) DEFAULT NULL,
-  `kontak_deskripsi_meta` text,
+  `kontak_deskripsi_meta` text DEFAULT NULL,
   `kontak_keyword_meta` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_kontak`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -1115,7 +1115,7 @@ CREATE TABLE `transaksi_midtrans` (
   `transaction_time` varchar(19) DEFAULT NULL,
   `bank` varchar(10) DEFAULT NULL,
   `va_number` varchar(40) DEFAULT NULL,
-  `pdf_url` text,
+  `pdf_url` text DEFAULT NULL,
   `status_code` char(3) DEFAULT NULL,
   PRIMARY KEY (`id_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1144,7 +1144,7 @@ CREATE TABLE `user` (
   `email` varchar(30) NOT NULL,
   `level` varchar(30) NOT NULL,
   `status` varchar(1) NOT NULL,
-  `foto` text,
+  `foto` text DEFAULT NULL,
   `password` varchar(100) NOT NULL,
   `provinsi` varchar(50) NOT NULL,
   `kota` varchar(50) NOT NULL,
@@ -1203,4 +1203,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-15  5:24:11
+-- Dump completed on 2021-10-06 18:42:41
